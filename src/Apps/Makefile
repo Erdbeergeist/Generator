@@ -40,6 +40,7 @@ TGT_BASE += gevgen_t2k
 endif
 ifeq ($(strip $(GOPT_ENABLE_ATMO)),YES)
 TGT_BASE += gevgen_atmo
+TGT_BASE += gevgen_atmo_mod #MOD
 TGT_BASE += gevgen_upmu
 endif
 ifeq ($(strip $(GOPT_ENABLE_NUCLEON_DECAY)),YES)
@@ -111,6 +112,11 @@ $(GENIE_BIN_PATH)/gevgen_t2k: gT2KEvGen.o $(call find_libs,gevgen_t2k)
 $(GENIE_BIN_PATH)/gevgen_atmo: gAtmoEvGen.o $(call find_libs,gevgen_atmo)
 	@echo "** Building gevgen_atmo"
 	$(LD) $(LDFLAGS) gAtmoEvGen.o $(LIBRARIES) -o $(GENIE_BIN_PATH)/gevgen_atmo
+
+$(GENIE_BIN_PATH)/gevgen_atmo_mod: gAtmoEvGen_mod.o $(call find_libs,gevgen_atmo_mod)
+	@echo "** Building gevgen_atmo_mod"
+	$(LD) $(LDFLAGS) gAtmoEvGen_mod.o $(LIBRARIES) -o $(GENIE_BIN_PATH)/gevgen_atmo_mod
+
 
 # (atmospheric) neutrino-incuded upgoing-muon flux generation app
 #
