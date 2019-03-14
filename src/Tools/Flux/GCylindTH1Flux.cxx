@@ -12,7 +12,7 @@
  Important revisions after version 2.0.0 :
 
  @ Feb 22, 2011 - JD
-   Implemented dummy versions of the new GFluxI::Clear, GFluxI::Index and 
+   Implemented dummy versions of the new GFluxI::Clear, GFluxI::Index and
    GFluxI::GenerateWeighted methods needed for pre-generation of flux
    interaction probabilities in GMCJDriver.
 
@@ -68,13 +68,23 @@ bool GCylindTH1Flux::GenerateNext(void)
   //-- Select a neutrino species from the flux fractions at the
   //   selected energy
   fgPdgC = (*fPdgCList)[this->SelectNeutrino(Ev)];
-
   //-- Compute neutrino 4-x
+  double phi, theta;
+  TVector3 bspot;
 
+  LOG("BEAM SPOT", pERROR) << "FINDMEBEAM";
   if(fRt <= 0) {
     fgX4.SetXYZT(0.,0.,0.,0.);
-  } 
+  }
   else {
+
+    RandomGen * r = RandomGen::Instance();
+    phi = 2*3.1415926*r->RndGen().Rndm();
+    theta = 3.1415926*r->RndGen().Rndm();
+    bspot.SetPtThetaPhi(500,theta,phi);
+    this->SetBeamSpot(bspot);
+    this->SetNuDirection(-1*bspot);
+
     // Create a vector (vec) that points to a random position at a disk
     // of radius Rt passing through the origin, perpendicular to the
     // input direction.
@@ -96,6 +106,7 @@ bool GCylindTH1Flux::GenerateNext(void)
   }
 
   LOG("Flux", pINFO) << "Generated neutrino pdg-code: " << fgPdgC;
+  LOG("Flux", pINFO) << "Generated neutrino BEAM: " << fgPdgC;
   LOG("Flux", pINFO)
         << "Generated neutrino p4: " << utils::print::P4AsShortString(&fgP4);
   LOG("Flux", pINFO)
@@ -106,9 +117,9 @@ bool GCylindTH1Flux::GenerateNext(void)
 //___________________________________________________________________________
 void GCylindTH1Flux::Clear(Option_t * opt)
 {
-// Dummy clear method needed to conform to GFluxI interface 
+// Dummy clear method needed to conform to GFluxI interface
 //
-  LOG("Flux", pERROR) << 
+  LOG("Flux", pERROR) <<
       "No Clear(Option_t * opt) method implemented for opt: "<< opt;
 }
 //___________________________________________________________________________
@@ -116,8 +127,8 @@ void GCylindTH1Flux::GenerateWeighted(bool gen_weighted)
 {
 // Dummy implementation needed to conform to GFluxI interface
 //
-  LOG("Flux", pERROR) << 
-      "No GenerateWeighted(bool gen_weighted) method implemented for " << 
+  LOG("Flux", pERROR) <<
+      "No GenerateWeighted(bool gen_weighted) method implemented for " <<
       "gen_weighted: " << gen_weighted;
 }
 //___________________________________________________________________________
@@ -201,7 +212,7 @@ void GCylindTH1Flux::AddEnergySpectrum(int nu_pdgc, TH1D * spectrum)
      Axis_t max = spectrum->GetBinLowEdge(nb)+spectrum->GetBinWidth(nb);
      fMaxEv = TMath::Max(fMaxEv, (double)max);
 
-     LOG("Flux", pNOTICE) 
+     LOG("Flux", pNOTICE)
           << "Updating maximum energy of flux particles to: " << fMaxEv;
 
      this->AddAllFluxes(); // update combined flux

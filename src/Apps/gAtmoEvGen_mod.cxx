@@ -548,7 +548,7 @@ GFluxI * TH1FluxDriver(void)
   spectrum->Write();
   f.Close();
 
-  TVector3 bdir (0,0,0);
+  TVector3 bdir (0,1,0);
   TVector3 bspot(0,0,0);
 
   flux->SetNuDirection      (bdir);
