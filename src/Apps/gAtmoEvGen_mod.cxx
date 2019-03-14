@@ -303,6 +303,7 @@ GeomAnalyzerI * GetGeometry        (void);
 //
 Long_t          gOptRunNu;                     // run number
 string          gOptFluxSim;                   // flux simulation (FLUKA, BGLRS or HAKKM)
+
 map<int,string> gOptFluxFiles;                 // neutrino pdg code -> flux file map
 bool            gOptUsingRootGeom = false;     // using root geom or target mix?
 map<int,double> gOptTgtMix;                    // target mix  (tgt pdg -> wght frac) / if not using detailed root geom
@@ -359,6 +360,7 @@ int main(int argc, char** argv)
   //
   GFluxI * flux_driver = FluxDriver();
 
+
   // get geometry driver
   GeomAnalyzerI * geom_driver = GetGeometry();
 
@@ -386,8 +388,10 @@ int main(int argc, char** argv)
   // event loop
   for(int iev = 0; iev < gOptNev; iev++) {
 
+
     // generate next event
     EventRecord* event = mcj_driver->GenerateEvent();
+
 
     // set weight (if using a weighted flux)
     //event->SetWeight(event->Weight()*flux_driver->Weight());
@@ -544,12 +548,13 @@ GFluxI * TH1FluxDriver(void)
   spectrum->Write();
   f.Close();
 
-  TVector3 bdir (0,0,1);
+  TVector3 bdir (0,0,0);
   TVector3 bspot(0,0,0);
 
   flux->SetNuDirection      (bdir);
   flux->SetBeamSpot         (bspot);
-  flux->SetTransverseRadius (-1);
+  LOG("Setting Transverse RAD", pINFO) << "FINDME";
+  flux->SetTransverseRadius (500);
   flux->AddEnergySpectrum   (gOptNuPdgCode, spectrum);
 
   GFluxI * flux_driver = dynamic_cast<GFluxI *>(flux);
