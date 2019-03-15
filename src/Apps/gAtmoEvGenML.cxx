@@ -552,7 +552,7 @@ GFluxI * TH1FluxDriver(void)
   }
   // save input flux
 
-  TFile f("./input-flux.root","recreate");
+  TFile f("./config/fluxes/input-flux.root","recreate");
   spectrum->Write();
   f.Close();
 
