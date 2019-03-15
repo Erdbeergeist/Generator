@@ -30,7 +30,8 @@ TGT_BASE =  gevgen          \
             gspl2root       \
             gntpc           \
             gpdfcomp        \
-            gsfcomp
+            gsfcomp         \
+	    gevgenML     
 
 ifeq ($(strip $(GOPT_ENABLE_FNAL)),YES)
 TGT_BASE += gevgen_fnal
@@ -40,7 +41,6 @@ TGT_BASE += gevgen_t2k
 endif
 ifeq ($(strip $(GOPT_ENABLE_ATMO)),YES)
 TGT_BASE += gevgen_atmo
-TGT_BASE += gevgen_atmo_mod #MOD
 TGT_BASE += gevgen_upmu
 endif
 ifeq ($(strip $(GOPT_ENABLE_NUCLEON_DECAY)),YES)
@@ -113,9 +113,9 @@ $(GENIE_BIN_PATH)/gevgen_atmo: gAtmoEvGen.o $(call find_libs,gevgen_atmo)
 	@echo "** Building gevgen_atmo"
 	$(LD) $(LDFLAGS) gAtmoEvGen.o $(LIBRARIES) -o $(GENIE_BIN_PATH)/gevgen_atmo
 
-$(GENIE_BIN_PATH)/gevgen_atmo_mod: gAtmoEvGen_mod.o $(call find_libs,gevgen_atmo_mod)
-	@echo "** Building gevgen_atmo_mod"
-	$(LD) $(LDFLAGS) gAtmoEvGen_mod.o $(LIBRARIES) -o $(GENIE_BIN_PATH)/gevgen_atmo_mod
+$(GENIE_BIN_PATH)/gevgenML: gAtmoEvGenML.o $(call find_libs,gevgenML)
+	@echo "** Building gevgenML"
+	$(LD) $(LDFLAGS) gAtmoEvGenML.o $(LIBRARIES) -o $(GENIE_BIN_PATH)/gevgenML
 
 
 # (atmospheric) neutrino-incuded upgoing-muon flux generation app
