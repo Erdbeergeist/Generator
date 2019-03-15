@@ -72,7 +72,7 @@ bool GCylindTH1MLFlux::GenerateNext(void)
   double phi, theta;
   TVector3 bspot;
 
-  LOG("BEAM SPOT", pERROR) << "FINDMEBEAM";
+  LOG("BEAM SPOT", pINFO) << "FINDMEBEAM";
   if(fRt <= 0) {
     fgX4.SetXYZT(0.,0.,0.,0.);
   }
