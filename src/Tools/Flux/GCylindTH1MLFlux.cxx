@@ -72,7 +72,7 @@ bool GCylindTH1MLFlux::GenerateNext(void)
   double phi, theta;
   TVector3 bspot;
 
-  LOG("BEAM SPOT", pINFO) << "FINDMEBEAM";
+  //LOG("BEAM SPOT", pINFO) << "FINDMEBEAM";
   if(fRt <= 0) {
     fgX4.SetXYZT(0.,0.,0.,0.);
   }
@@ -106,7 +106,7 @@ bool GCylindTH1MLFlux::GenerateNext(void)
   }
 
   LOG("Flux", pINFO) << "Generated neutrino pdg-code: " << fgPdgC;
-  LOG("Flux", pINFO) << "Generated neutrino BEAM: " << fgPdgC;
+//  LOG("Flux", pINFO) << "Generated neutrino BEAM: " << fgPdgC;
   LOG("Flux", pINFO)
         << "Generated neutrino p4: " << utils::print::P4AsShortString(&fgP4);
   LOG("Flux", pINFO)
