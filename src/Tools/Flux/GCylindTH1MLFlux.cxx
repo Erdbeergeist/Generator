@@ -81,7 +81,7 @@ bool GCylindTH1MLFlux::GenerateNext(void)
     RandomGen * r = RandomGen::Instance();
     phi = 2*3.1415926*r->RndGen().Rndm();
     theta = 3.1415926*r->RndGen().Rndm();
-    bspot.SetPtThetaPhi(500,theta,phi);
+    bspot.SetPtThetaPhi(1000,theta,phi);
     this->SetBeamSpot(bspot);
     this->SetNuDirection(-1*bspot);
 
