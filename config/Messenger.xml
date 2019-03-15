@@ -195,6 +195,7 @@
 
   <priority msgstream="gevgen">              NOTICE </priority>
   <priority msgstream="gevgen_dm">           NOTICE </priority>
+  <priority msgstream="gevgenML">            DEBUG </priority>
   <priority msgstream="gevgen_ndcy">         NOTICE </priority>
   <priority msgstream="gevgen_atmo">         NOTICE </priority>
   <priority msgstream="gevgen_upmu">         NOTICE </priority>

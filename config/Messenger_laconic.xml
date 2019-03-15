@@ -188,6 +188,7 @@
   <priority msgstream="gevgen">                        WARN   </priority>
   <priority msgstream="gevgen_dm">                     WARN   </priority>
   <priority msgstream="gevgen_ndcy">                   WARN   </priority>
+  <priority msgstream="gevgenML">                   WARN   </priority>
   <priority msgstream="gevgen_atmo">                   WARN   </priority>
   <priority msgstream="gevgen_upmu">                   WARN   </priority>
   <priority msgstream="gevgen_t2k">                    WARN   </priority>
